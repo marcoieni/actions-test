@@ -79,9 +79,13 @@ removeDir() {
 removeUnusedDirectories() {
     local dirs_to_remove=(
         "/usr/local/lib/android"
-
         # Haskell runtime
         "/usr/local/.ghcup"
+        # Azure
+        "/opt/az"
+        "/etc/mysql"
+        "/usr/share/php"
+        "/etc/php/"
     )
 
     for dir in "${dirs_to_remove[@]}"; do
@@ -114,6 +118,8 @@ cleanPackages() {
         'azure-cli'             \
         'firefox'               \
         'gcc'                   \
+        'gcc-12'                \
+        'gcc-13'                \
         'google-chrome-stable'  \
         'google-cloud-cli'      \
         'groff-base'            \
