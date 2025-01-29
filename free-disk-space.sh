@@ -129,6 +129,7 @@ cleanPackages() {
         'firefox'               \
         'gcc-12'                \
         'gcc-13'                \
+        'gcc-14'                \
         'gcc'                   \
         'g++-14'                \
         'gfortran-14'           \
