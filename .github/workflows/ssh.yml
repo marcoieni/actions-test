@@ -6,7 +6,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: free up disk space
-      run: free-disk-space.sh
+      run: ./free-disk-space.sh
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
       with:
