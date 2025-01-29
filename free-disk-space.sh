@@ -75,7 +75,6 @@ removeDir() {
 removeUnusedDirectories() {
     local dirs_to_remove=(
         "/usr/local/lib/android"
-        "/usr/share/dotnet"
 
         # Haskell runtime
         "/usr/local/.ghcup"
