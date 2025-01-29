@@ -113,6 +113,7 @@ cleanPackages() {
         '^java-*'               \
         '^libllvm.*'            \
         '^llvm-.*'              \
+        '^mercurial.*'          \
         '^mysql-.*'             \
         '^vim.*'                \
         'azure-cli'             \
@@ -127,8 +128,11 @@ cleanPackages() {
         'libgl1-mesa-dri'       \
         'microsoft-edge-stable' \
         'php.*'                 \
+        'podman'                \
         'powershell'            \
-        'snapd'
+        'skopeo'                \
+        'snapd'                 \
+        'tmux'
 
     sudo apt-get autoremove -y || echo "::warning::The command [sudo apt-get autoremove -y] failed"
     sudo apt-get clean || echo "::warning::The command [sudo apt-get clean] failed failed"
