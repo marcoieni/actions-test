@@ -108,6 +108,7 @@ cleanPackages() {
         '^dotnet-.*'            \
         '^gcc*'                 \
         '^java-*'               \
+        '^libgcc*'              \
         '^libllvm.*'            \
         '^llvm-.*'              \
         '^mysql-.*'             \
