@@ -3,6 +3,9 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-24.04
+    concurrency:
+      group: actions-test-${{ github.ref }}
+      cancel-in-progress: true
     steps:
     - uses: actions/checkout@v4
     - name: free up disk space
