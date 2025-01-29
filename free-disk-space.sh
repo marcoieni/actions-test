@@ -118,9 +118,9 @@ cleanPackages() {
         '^vim.*'                \
         'azure-cli'             \
         'firefox'               \
-        'gcc'                   \
         'gcc-12'                \
         'gcc-13'                \
+        'gcc'                   \
         'google-chrome-stable'  \
         'google-cloud-cli'      \
         'groff-base'            \
