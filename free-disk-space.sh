@@ -105,13 +105,11 @@ cleanPackages() {
         '^dotnet-.*'           \
         '^llvm-.*'             \
         'php.*'                \
-        '^mongodb-.*'          \
         '^mysql-.*'            \
         'azure-cli'            \
         'google-chrome-stable' \
         'firefox'              \
         'powershell'           \
-        'mono-devel'           \
         'libgl1-mesa-dri'      \
         'google-cloud-sdk'     \
         'google-cloud-cli'
