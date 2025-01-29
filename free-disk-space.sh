@@ -104,19 +104,25 @@ execAndMeasureSpaceChange() {
 # REF: https://github.com/apache/flink/blob/master/tools/azure-pipelines/free_disk_space.sh
 cleanPackages() {
     sudo apt-get purge -y --fix-missing \
-        '^aspnetcore-.*'       \
-        '^dotnet-.*'           \
-        '^java-*'                 \
-        '^llvm-.*'             \
-        '^mysql-.*'            \
-        'azure-cli'            \
-        'firefox'              \
-        'google-chrome-stable' \
-        'microsoft-edge-stable'   \
-        'google-cloud-cli'     \
-        'libgl1-mesa-dri'      \
-        'php.*'                \
-        'powershell'
+        '^aspnetcore-.*'        \
+        '^dotnet-.*'            \
+        '^gcc*'                 \
+        '^java-*'               \
+        '^libllvm.*'            \
+        '^llvm-.*'              \
+        '^mysql-.*'             \
+        '^vim.*'                \
+        'azure-cli'             \
+        'firefox'               \
+        'google-chrome-stable'  \
+        'google-cloud-cli'      \
+        'groff-base'            \
+        'kubectl'               \
+        'libgl1-mesa-dri'       \
+        'microsoft-edge-stable' \
+        'php.*'                 \
+        'powershell'            \
+        'snapd'
 
     sudo apt-get autoremove -y || echo "::warning::The command [sudo apt-get autoremove -y] failed"
     sudo apt-get clean || echo "::warning::The command [sudo apt-get clean] failed failed"
