@@ -122,6 +122,7 @@ cleanPackages() {
         '^mercurial.*'          \
         '^mysql-.*'             \
         '^vim.*'                \
+        '^fonts-.*'              \
         'azure-cli'             \
         'buildah'               \
         'cpp-13'                \
