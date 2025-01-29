@@ -131,6 +131,7 @@ cleanPackages() {
         'gcc-13'                \
         'gcc'                   \
         'g++-14'                \
+        'gfortran-14'           \
         'google-chrome-stable'  \
         'google-cloud-cli'      \
         'groff-base'            \
