@@ -111,7 +111,6 @@ cleanPackages() {
         'firefox'              \
         'powershell'           \
         'libgl1-mesa-dri'      \
-        'google-cloud-sdk'     \
         'google-cloud-cli'
 
     sudo apt-get autoremove -y || echo "::warning::The command [sudo apt-get autoremove -y] failed"
