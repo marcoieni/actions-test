@@ -4,6 +4,10 @@ set -euo pipefail
 # Free disk space on Linux GitHub action runners
 # Script inspired by https://github.com/jlumbroso/free-disk-space
 
+# When updating to a new ubuntu version:
+# - Check that there are no docker images preinstalled with `docker image ls`
+# - Check that there are no big packages preinstalled that we aren't using
+
 # print a line of the specified character
 printSeparationLine() {
     for ((i = 0; i < 80; i++)); do
@@ -116,14 +120,6 @@ cleanPackages() {
     sudo apt-get clean || echo "::warning::The command [sudo apt-get clean] failed failed"
 }
 
-# Remove Docker images
-cleanDocker() {
-    echo "=> Removing the following docker images:"
-    sudo docker image ls
-    echo "=> Removing docker images..."
-    sudo docker image prune --all --force || true
-}
-
 # Remove Swap storage
 cleanSwap() {
     sudo swapoff -a || true
@@ -139,7 +135,6 @@ printDF "BEFORE CLEAN-UP:"
 echo ""
 
 execAndMeasureSpaceChange cleanPackages "Unused packages"
-execAndMeasureSpaceChange cleanDocker "Docker images"
 execAndMeasureSpaceChange cleanSwap "Swap storage"
 
 removeUnusedDirectories
