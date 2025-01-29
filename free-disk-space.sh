@@ -79,12 +79,18 @@ removeDir() {
 removeUnusedDirectories() {
     local dirs_to_remove=(
         "/usr/local/lib/android"
-        # Haskell runtime
-        "/usr/local/.ghcup"
-        # Azure
-        "/opt/az"
         "/etc/mysql"
         "/usr/share/php"
+
+        # Haskell runtime
+        "/usr/local/.ghcup"
+
+        # Azure
+        "/opt/az"
+        "/usr/share/az_"*
+
+        # Environemnt variable set by GitHub Actions
+        "$AGENT_TOOLSDIRECTORY"
     )
 
     for dir in "${dirs_to_remove[@]}"; do
