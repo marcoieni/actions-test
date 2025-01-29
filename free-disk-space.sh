@@ -85,7 +85,6 @@ removeUnusedDirectories() {
         "/opt/az"
         "/etc/mysql"
         "/usr/share/php"
-        "/etc/php/"
     )
 
     for dir in "${dirs_to_remove[@]}"; do
@@ -124,6 +123,7 @@ cleanPackages() {
         'gcc-12'                \
         'gcc-13'                \
         'gcc'                   \
+        'g++-14'                \
         'google-chrome-stable'  \
         'google-cloud-cli'      \
         'groff-base'            \
