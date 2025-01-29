@@ -106,15 +106,14 @@ cleanPackages() {
     sudo apt-get purge -y --fix-missing \
         '^aspnetcore-.*'        \
         '^dotnet-.*'            \
-        '^gcc*'                 \
         '^java-*'               \
-        '^libgcc*'              \
         '^libllvm.*'            \
         '^llvm-.*'              \
         '^mysql-.*'             \
         '^vim.*'                \
         'azure-cli'             \
         'firefox'               \
+        'gcc'                   \
         'google-chrome-stable'  \
         'google-cloud-cli'      \
         'groff-base'            \
