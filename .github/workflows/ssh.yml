@@ -2,9 +2,11 @@ name: CI
 on: [push]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@v4
+    - name: free up disk space
+      run: free-disk-space.sh
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
       with:
