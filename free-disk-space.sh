@@ -112,7 +112,7 @@ execAndMeasureSpaceChange() {
 # Remove large packages
 # REF: https://github.com/apache/flink/blob/master/tools/azure-pipelines/free_disk_space.sh
 cleanPackages() {
-    sudo apt-get purge -y --fix-missing \
+    sudo apt-get purge -y --autoremove --fix-missing \
         '.*-icon-theme$'         \
         '^aspnetcore-.*'        \
         '^dotnet-.*'            \
@@ -145,7 +145,9 @@ cleanPackages() {
         'snapd'                 \
         'tmux'
 
+    echo "=> autoremove start"
     sudo apt-get autoremove -y || echo "::warning::The command [sudo apt-get autoremove -y] failed"
+    echo "=> autoremove end"
     sudo apt-get clean || echo "::warning::The command [sudo apt-get clean] failed failed"
 }
 
