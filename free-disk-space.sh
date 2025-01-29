@@ -106,15 +106,17 @@ cleanPackages() {
     sudo apt-get purge -y --fix-missing \
         '^aspnetcore-.*'       \
         '^dotnet-.*'           \
+        '^java-*'                 \
         '^llvm-.*'             \
-        'php.*'                \
         '^mysql-.*'            \
         'azure-cli'            \
-        'google-chrome-stable' \
         'firefox'              \
-        'powershell'           \
+        'google-chrome-stable' \
+        'microsoft-edge-stable'   \
+        'google-cloud-cli'     \
         'libgl1-mesa-dri'      \
-        'google-cloud-cli'
+        'php.*'                \
+        'powershell'
 
     sudo apt-get autoremove -y || echo "::warning::The command [sudo apt-get autoremove -y] failed"
     sudo apt-get clean || echo "::warning::The command [sudo apt-get clean] failed failed"
