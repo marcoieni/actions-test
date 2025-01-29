@@ -108,7 +108,7 @@ execAndMeasureSpaceChange() {
 # REF: https://github.com/apache/flink/blob/master/tools/azure-pipelines/free_disk_space.sh
 cleanPackages() {
     sudo apt-get purge -y --fix-missing \
-        '*-icon-theme$'         \
+        '.*-icon-theme$'         \
         '^aspnetcore-.*'        \
         '^dotnet-.*'            \
         '^java-*'               \
