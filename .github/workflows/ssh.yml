@@ -8,6 +8,8 @@ jobs:
       cancel-in-progress: true
     steps:
     - uses: actions/checkout@v4
+      with:
+        persist-credentials: false
     - name: free up disk space
       run: ./free-disk-space.sh
     - name: Setup tmate session
