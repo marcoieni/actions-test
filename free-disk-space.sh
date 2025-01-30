@@ -9,6 +9,14 @@ set -euo pipefail
 # - Check that there are no big packages preinstalled that we aren't using
 # - Check that all directores we are removing are still present (look at the warnings)
 
+# print a line of the specified character
+printSeparationLine() {
+    for ((i = 0; i < 80; i++)); do
+        printf "%s" "$1"
+    done
+    printf "\n"
+}
+
 # compute available space
 # REF: https://unix.stackexchange.com/a/42049/60849
 # REF: https://stackoverflow.com/a/450821/408734
@@ -60,11 +68,13 @@ execAndMeasure() {
 printDF() {
     local caption=${1}
 
+    printSeparationLine "="
     echo "${caption}"
     echo ""
     echo "$ df -h"
     echo ""
     df -h
+    printSeparationLine "="
 }
 
 removeUnusedDirsAndFiles() {
