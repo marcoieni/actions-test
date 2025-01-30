@@ -90,6 +90,8 @@ removeUnusedDirsAndFiles() {
         "/usr/local/share/edge_driver"
         "/usr/local/share/gecko_driver"
         "/usr/local/share/icons"
+        "/usr/local/share/vim"
+        "/usr/local/share/emacs"
         "/usr/local/share/powershell"
         "/usr/local/share/vcpkg"
         "/usr/share/apache-maven-"*
@@ -212,6 +214,10 @@ cleanSwap() {
     free -h
 }
 
+uninstallPythonPackages() {
+    sudo pipx uninstall ansible-core
+}
+
 # Display initial disk space stats
 
 AVAILABLE_INITIAL=$(getAvailableSpace)
@@ -222,6 +228,7 @@ echo ""
 execAndMeasureSpaceChange cleanPackages "Unused packages"
 execAndMeasureSpaceChange cleanSwap "Swap storage"
 execAndMeasureSpaceChange removeNodeModules "Node modules"
+execAndMeasureSpaceChange uninstallPythonPackages "Python Packages"
 
 removeUnusedDirsAndFiles
 
