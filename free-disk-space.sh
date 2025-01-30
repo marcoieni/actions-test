@@ -78,7 +78,7 @@ removeRecursive() {
 }
 
 removeUnusedDirsAndFiles() {
-    local dirs_to_remove=(
+    local to_remove=(
         "/etc/mysql"
         "/usr/local/aws-sam-cli"
         "/usr/local/doc/cmake"
@@ -132,7 +132,7 @@ removeUnusedDirsAndFiles() {
         "$AGENT_TOOLSDIRECTORY"
     )
 
-    for element in "${dirs_to_remove[@]}"; do
+    for element in "${to_remove[@]}"; do
         removeRecursive "$element"
     done
 }
@@ -214,7 +214,7 @@ cleanSwap() {
     free -h
 }
 
-uninstallPythonPackages() {
+removePythonPackages() {
     sudo pipx uninstall ansible-core
 }
 
@@ -228,7 +228,7 @@ echo ""
 execAndMeasureSpaceChange cleanPackages "Unused packages"
 execAndMeasureSpaceChange cleanSwap "Swap storage"
 execAndMeasureSpaceChange removeNodeModules "Node modules"
-execAndMeasureSpaceChange uninstallPythonPackages "Python Packages"
+execAndMeasureSpaceChange removePythonPackages "Python Packages"
 
 removeUnusedDirsAndFiles
 
