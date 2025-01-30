@@ -20,7 +20,7 @@ jobs:
   build-arm:
     runs-on: ubuntu-24.04-arm
     concurrency:
-      group: actions-test-${{ github.ref }}
+      group: actions-test-arm-${{ github.ref }}
       cancel-in-progress: true
     steps:
     - uses: actions/checkout@v4
