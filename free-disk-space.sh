@@ -30,6 +30,16 @@ formatByteCount() {
     numfmt --to=iec-i --suffix=B --padding=7 "$1"'000'
 }
 
+isX86() {
+    local arch
+    arch=$(uname -m)
+    if [ "$arch" = "x86_64" ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
 # Measure saved space and how long it took to run the task
 execAndMeasure() {
     local task_name=${1}
@@ -172,8 +182,6 @@ cleanPackages() {
         'gcc'
         'g++-14'
         'gfortran-14'
-        'google-chrome-stable'
-        'google-cloud-cli'
         'groff-base'
         'kubectl'
         'libgl1-mesa-dri'
@@ -186,10 +194,14 @@ cleanPackages() {
         'tmux'
     )
 
-    for package in "${packages[@]}"; do
-        sudo apt-get -qq remove -y --fix-missing "$package" ||
-            echo "::warning::Failed to remove package $package"
-    done
+    if isX86; then
+        packages+=(
+            'google-chrome-stable'
+            'google-cloud-cli'
+        )
+    fi
+
+    sudo apt-get -qq remove -y --fix-missing "${packages[@]}"
 
     echo "=> apt-get autoremove"
     sudo apt-get autoremove -y || echo "::warning::The command [sudo apt-get autoremove -y] failed"
@@ -206,11 +218,16 @@ cleanSwap() {
 
 removePythonPackages() {
     local packages=(
-        "ansible-core"
     )
 
+    if isX86; then
+        packages+=(
+            'ansible-core'
+        )
+    fi
+
     for p in "${packages[@]}"; do
-        sudo pipx uninstall ansible-core || echo "::warning::Failed to remove package $p"
+        sudo pipx uninstall "$p"
     done
 }
 
@@ -229,4 +246,4 @@ main() {
     echo ""
 }
 
-execAndMeasure "Total saved" main
+execAndMeasure "Total" main
