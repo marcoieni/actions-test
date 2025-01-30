@@ -160,7 +160,6 @@ removeNodeModules() {
 # Remove large packages
 # REF: https://github.com/apache/flink/blob/master/tools/azure-pipelines/free_disk_space.sh
 cleanPackages() {
-    # sudo apt-get purge -y --autoremove --fix-missing
     local packages=(
         '.*-icon-theme$'
         '^aspnetcore-.*'
@@ -201,7 +200,7 @@ cleanPackages() {
         )
     fi
 
-    sudo apt-get -qq remove -y --fix-missing "${packages[@]}"
+    sudo apt-get purge -y --autoremove --fix-missing "${packages[@]}"
 
     echo "=> apt-get autoremove"
     sudo apt-get autoremove -y || echo "::warning::The command [sudo apt-get autoremove -y] failed"
