@@ -91,6 +91,9 @@ removeUnusedDirectories() {
         "/usr/local/share/icons"
         "/usr/local/share/edge_driver"
         "/usr/local/share/gecko_driver"
+        "/usr/share/kotlinc"
+        "/usr/local/julia"*
+
 
         # Haskell runtime
         "/usr/local/.ghcup"
@@ -105,6 +108,26 @@ removeUnusedDirectories() {
 
     for dir in "${dirs_to_remove[@]}"; do
         removeDir "$dir"
+    done
+}
+
+removeNodeModules() {
+    local node_modules=(
+        "lerna"
+        "grunt"
+        "gulp"
+        "bazel"
+        "n"
+        "newman"
+        "@bazel/bazelisk"
+        "parcel"
+        "webpack"
+        "webpack-cli"
+        "yarn"
+    )
+
+    for module in "${node_modules[@]}"; do
+        npm uninstall -g "$module" || echo "::warning::Failed to uninstall $module"
     done
 }
 
@@ -178,6 +201,7 @@ echo ""
 
 execAndMeasureSpaceChange cleanPackages "Unused packages"
 execAndMeasureSpaceChange cleanSwap "Swap storage"
+execAndMeasureSpaceChange removeNodeModules "Node modules"
 
 removeUnusedDirectories
 
