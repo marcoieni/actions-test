@@ -12,7 +12,7 @@ jobs:
         persist-credentials: false
     - name: free up disk space
       run: ./free-disk-space.sh
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
-      with:
-        limit-access-to-actor: true
+    # - name: Setup tmate session
+    #   uses: mxschmitt/action-tmate@v3
+    #   with:
+    #     limit-access-to-actor: true

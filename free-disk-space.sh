@@ -30,25 +30,28 @@ formatByteCount() {
     numfmt --to=iec-i --suffix=B --padding=7 "$1"'000'
 }
 
-# macro to output saved space
-printSavedSpace() {
-    # Disk space before the operation
-    local before=${1}
-    local title=${2:-}
+# Measure saved space and how long it took to run the task
+execAndMeasure() {
+    local task_name=${1}
 
+    local start
+    start=$(date +%s)
+
+    local before
+    before=$(getAvailableSpace)
+
+    # Run the task. Skip the first argument because it's the task name.
+    "${@:2}"
+
+    local end
+    end=$(date +%s)
     local after
     after=$(getAvailableSpace)
-    local saved=$((after - before))
 
-    echo ""
-    printSeparationLine "*"
-    if [ -n "${title}" ]; then
-        echo "=> ${title}: Saved $(formatByteCount "$saved")"
-    else
-        echo "=> Saved $(formatByteCount "$saved")"
-    fi
-    printSeparationLine "*"
-    echo ""
+    local saved=$((after - before))
+    local seconds_taken=$((end - start))
+
+    echo "==> ${task_name}: Saved $(formatByteCount "$saved") in $seconds_taken seconds"
 }
 
 # macro to print output of df with caption
@@ -62,19 +65,6 @@ printDF() {
     echo ""
     df -h
     printSeparationLine "="
-}
-
-removeRecursive() {
-    element=${1}
-
-    local before
-    if [ ! -e "$element" ]; then
-        echo "::warning::Directory or file $element does not exist, skipping."
-    else
-        before=$(getAvailableSpace)
-        sudo rm -rf "$element"
-        printSavedSpace "$before" "Removed $element"
-    fi
 }
 
 removeUnusedDirsAndFiles() {
@@ -133,7 +123,11 @@ removeUnusedDirsAndFiles() {
     )
 
     for element in "${to_remove[@]}"; do
-        removeRecursive "$element"
+        if [ ! -e "$element" ]; then
+            echo "::warning::Directory or file $element does not exist, skipping."
+        else
+            execAndMeasure "Removed $element" sudo rm -rf "$element"
+        fi
     done
 }
 
@@ -151,17 +145,6 @@ removeNodeModules() {
         "webpack-cli"     \
         "webpack"         \
         "yarn"
-}
-
-execAndMeasureSpaceChange() {
-    local operation=${1} # Function to execute
-    local title=${2}
-
-    local before
-    before=$(getAvailableSpace)
-    $operation
-
-    printSavedSpace "$before" "$title"
 }
 
 # Remove large packages
@@ -225,10 +208,10 @@ AVAILABLE_INITIAL=$(getAvailableSpace)
 printDF "BEFORE CLEAN-UP:"
 echo ""
 
-execAndMeasureSpaceChange cleanPackages "Unused packages"
-execAndMeasureSpaceChange cleanSwap "Swap storage"
-execAndMeasureSpaceChange removeNodeModules "Node modules"
-execAndMeasureSpaceChange removePythonPackages "Python Packages"
+execAndMeasure "Unused packages" cleanPackages
+execAndMeasure "Swap storage" cleanSwap
+execAndMeasure "Node modules" removeNodeModules
+execAndMeasure "Python Packages" removePythonPackages
 
 removeUnusedDirsAndFiles
 
