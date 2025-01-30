@@ -142,6 +142,8 @@ removeUnusedDirsAndFiles() {
 }
 
 removeNodeModules() {
+    npm list -g --depth=0
+
     sudo npm uninstall -g \
         "@bazel/bazelisk" \
         "bazel"           \
