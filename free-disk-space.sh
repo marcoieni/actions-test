@@ -112,23 +112,19 @@ removeUnusedDirectories() {
 }
 
 removeNodeModules() {
-    local node_modules=(
-        "lerna"
-        "grunt"
-        "gulp"
-        "bazel"
-        "n"
-        "newman"
-        "@bazel/bazelisk"
-        "parcel"
-        "webpack"
-        "webpack-cli"
+    sudo npm uninstall -g \
+        "@bazel/bazelisk" \
+        "bazel"           \
+        "grunt"           \
+        "gulp"            \
+        "lerna"           \
+        "n"               \
+        "newman"          \
+        "parcel"          \
+        "typescript"      \
+        "webpack-cli"     \
+        "webpack"         \
         "yarn"
-    )
-
-    for module in "${node_modules[@]}"; do
-        npm uninstall -g "$module" || echo "::warning::Failed to uninstall $module"
-    done
 }
 
 execAndMeasureSpaceChange() {
