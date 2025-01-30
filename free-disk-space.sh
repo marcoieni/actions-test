@@ -205,7 +205,13 @@ cleanSwap() {
 }
 
 removePythonPackages() {
-    sudo pipx uninstall ansible-core
+    local packages=(
+        "ansible-core"
+    )
+
+    for p in "${packages[@]}"; do
+        sudo pipx uninstall ansible-core || echo "::warning::Failed to remove package $p"
+    done
 }
 
 main() {
