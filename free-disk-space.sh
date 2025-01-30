@@ -81,6 +81,15 @@ removeUnusedDirectories() {
         "/usr/local/lib/android"
         "/etc/mysql"
         "/usr/share/php"
+        "/usr/share/swift/"
+        "/usr/local/share/powershell"
+        "/usr/local/share/chromium"
+        "/usr/local/share/cmake-"*
+        "/usr/local/share/chromedriver-"*
+        "/usr/local/share/vcpkg"
+        "/usr/local/share/icons"
+        "/usr/local/share/edge_driver"
+        "/usr/local/share/gecko_driver"
 
         # Haskell runtime
         "/usr/local/.ghcup"
