@@ -80,6 +80,8 @@ removeRecursive() {
 removeUnusedDirsAndFiles() {
     local dirs_to_remove=(
         "/etc/mysql"
+        "/usr/local/aws-sam-cli"
+        "/usr/local/doc/cmake"
         "/usr/local/julia"*
         "/usr/local/lib/android"
         "/usr/local/share/chromedriver-"*
@@ -90,9 +92,13 @@ removeUnusedDirsAndFiles() {
         "/usr/local/share/icons"
         "/usr/local/share/powershell"
         "/usr/local/share/vcpkg"
-        "/usr/local/aws-sam-cli"
+        "/usr/share/apache-maven-"*
+        "/usr/share/gradle-"*
+        "/usr/share/java"
         "/usr/share/kotlinc"
+        "/usr/share/miniconda"
         "/usr/share/php"
+        "/usr/share/ri"
         "/usr/share/swift"
 
         # binaries
@@ -108,6 +114,7 @@ removeUnusedDirsAndFiles() {
         "/usr/local/bin/kustomize"
         "/usr/local/bin/minikube"
         "/usr/local/bin/packer"
+        "/usr/local/bin/phpunit"
         "/usr/local/bin/pulumi-"*
         "/usr/local/bin/pulumi"
         "/usr/local/bin/stack"
