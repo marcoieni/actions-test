@@ -4,9 +4,10 @@ set -euo pipefail
 # Free disk space on Linux GitHub action runners
 # Script inspired by https://github.com/jlumbroso/free-disk-space
 
-# When updating to a new ubuntu version:
+# When updating to a new ubuntu version (e.g. from ubuntu-24.04):
 # - Check that there are no docker images preinstalled with `docker image ls`
 # - Check that there are no big packages preinstalled that we aren't using
+# - Check that all directores we are removing are still present (look at the warnings)
 
 # print a line of the specified character
 printSeparationLine() {
