@@ -208,25 +208,19 @@ removePythonPackages() {
     sudo pipx uninstall ansible-core
 }
 
-# Display initial disk space stats
+main() {
+    printDF "BEFORE CLEAN-UP:"
+    echo ""
 
-AVAILABLE_INITIAL=$(getAvailableSpace)
+    execAndMeasure "Unused packages" cleanPackages
+    execAndMeasure "Swap storage" cleanSwap
+    execAndMeasure "Node modules" removeNodeModules
+    execAndMeasure "Python Packages" removePythonPackages
 
-printDF "BEFORE CLEAN-UP:"
-echo ""
+    removeUnusedDirsAndFiles
 
-execAndMeasure "Unused packages" cleanPackages
-execAndMeasure "Swap storage" cleanSwap
-execAndMeasure "Node modules" removeNodeModules
-execAndMeasure "Python Packages" removePythonPackages
+    printDF "AFTER CLEAN-UP:"
+    echo ""
+}
 
-removeUnusedDirsAndFiles
-
-# Output saved space statistic
-echo ""
-printDF "AFTER CLEAN-UP:"
-
-echo ""
-echo ""
-
-printSavedSpace "$AVAILABLE_INITIAL" "Total saved"
+execAndMeasure "Total saved" main
