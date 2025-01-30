@@ -150,39 +150,46 @@ removeNodeModules() {
 # Remove large packages
 # REF: https://github.com/apache/flink/blob/master/tools/azure-pipelines/free_disk_space.sh
 cleanPackages() {
-    sudo apt-get purge -y --autoremove --fix-missing \
-        '.*-icon-theme$'         \
-        '^aspnetcore-.*'        \
-        '^dotnet-.*'            \
-        '^java-*'               \
-        '^libllvm.*'            \
-        '^llvm-.*'              \
-        '^mercurial.*'          \
-        '^mysql-.*'             \
-        '^vim.*'                \
-        '^fonts-.*'             \
-        'azure-cli'             \
-        'buildah'               \
-        'cpp-13'                \
-        'firefox'               \
-        'gcc-12'                \
-        'gcc-13'                \
-        'gcc-14'                \
-        'gcc'                   \
-        'g++-14'                \
-        'gfortran-14'           \
-        'google-chrome-stable'  \
-        'google-cloud-cli'      \
-        'groff-base'            \
-        'kubectl'               \
-        'libgl1-mesa-dri'       \
-        'microsoft-edge-stable' \
-        'php.*'                 \
-        'podman'                \
-        'powershell'            \
-        'skopeo'                \
-        'snapd'                 \
+    # sudo apt-get purge -y --autoremove --fix-missing
+    local packages=(
+        '.*-icon-theme$'
+        '^aspnetcore-.*'
+        '^dotnet-.*'
+        '^java-*'
+        '^libllvm.*'
+        '^llvm-.*'
+        '^mercurial.*'
+        '^mysql-.*'
+        '^vim.*'
+        '^fonts-.*'
+        'azure-cli'
+        'buildah'
+        'cpp-13'
+        'firefox'
+        'gcc-12'
+        'gcc-13'
+        'gcc-14'
+        'gcc'
+        'g++-14'
+        'gfortran-14'
+        'google-chrome-stable'
+        'google-cloud-cli'
+        'groff-base'
+        'kubectl'
+        'libgl1-mesa-dri'
+        'microsoft-edge-stable'
+        'php.*'
+        'podman'
+        'powershell'
+        'skopeo'
+        'snapd'
         'tmux'
+    )
+
+    for package in "${packages[@]}"; do
+        sudo apt-get -qq remove -y --fix-missing "$package" ||
+            echo "::warning::Failed to remove package $package"
+    done
 
     echo "=> apt-get autoremove"
     sudo apt-get autoremove -y || echo "::warning::The command [sudo apt-get autoremove -y] failed"
