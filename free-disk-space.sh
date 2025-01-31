@@ -239,7 +239,10 @@ main() {
     printDF "BEFORE CLEAN-UP:"
 
     execAndMeasure "Unused packages" cleanPackages
-    execAndMeasure "Node modules" removeNodeModules
+    if isX86; then
+        # On ARM, `npm uninstall` fails with a segmentation fault.
+        execAndMeasure "Node modules" removeNodeModules
+    fi
     execAndMeasure "Python Packages" removePythonPackages
     removeUnusedDirsAndFiles
     execAndMeasure "Swap storage" cleanSwap
