@@ -147,7 +147,6 @@ removeUnusedDirsAndFiles() {
 removeNodeModules() {
     sudo npm uninstall -g \
         "@bazel/bazelisk" \
-        "bazel"           \
         "grunt"           \
         "gulp"            \
         "lerna"           \
