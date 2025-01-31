@@ -132,13 +132,16 @@ removeUnusedDirsAndFiles() {
         "$AGENT_TOOLSDIRECTORY"
     )
 
+    local existing=()
     for element in "${to_remove[@]}"; do
         if [ ! -e "$element" ]; then
             echo "::warning::Directory or file $element does not exist, skipping."
         else
-            execAndMeasure "Removed $element" sudo rm -rf "$element"
+            existing+=("$element")
         fi
     done
+
+    execAndMeasure "Removed unused directories" sudo rm -rf "${existing[@]}"
 }
 
 removeNodeModules() {
