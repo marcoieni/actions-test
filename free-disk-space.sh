@@ -150,25 +150,18 @@ removeUnusedDirsAndFiles() {
 }
 
 removeNodeModules() {
-    local packages=(
-        "@bazel/bazelisk"
-        "grunt"
-        "gulp"
-        "lerna"
-        "n"
-        "newman"
-        "parcel"
-        "typescript"
-        "webpack-cli"
-        "webpack"
+    sudo npm uninstall -g \
+        "@bazel/bazelisk" \
+        "grunt"           \
+        "gulp"            \
+        "lerna"           \
+        "n"               \
+        "newman"          \
+        "parcel"          \
+        "typescript"      \
+        "webpack-cli"     \
+        "webpack"         \
         "yarn"
-    )
-
-    # Uninstall packages one by one instead of all at once to avoid
-    # segmentation fault on arm.
-    for package in "${packages[@]}"; do
-        sudo npm uninstall -g "$package"
-    done
 }
 
 # Remove unused packages.
