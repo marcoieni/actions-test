@@ -239,11 +239,10 @@ main() {
     printDF "BEFORE CLEAN-UP:"
 
     execAndMeasure "Unused packages" cleanPackages
-    execAndMeasure "Swap storage" cleanSwap
     execAndMeasure "Node modules" removeNodeModules
     execAndMeasure "Python Packages" removePythonPackages
-
     removeUnusedDirsAndFiles
+    execAndMeasure "Swap storage" cleanSwap
 
     printDF "AFTER CLEAN-UP:"
 }
