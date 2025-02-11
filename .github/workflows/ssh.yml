@@ -18,7 +18,7 @@ jobs:
     #     limit-access-to-actor: true
 
   build-arm:
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-22.04-arm
     concurrency:
       group: actions-test-arm-${{ github.ref }}
       cancel-in-progress: true
@@ -26,9 +26,9 @@ jobs:
     - uses: actions/checkout@v4
       with:
         persist-credentials: false
-    - name: free up disk space
-      run: ./free-disk-space.sh
-    # - name: Setup tmate session
-    #   uses: mxschmitt/action-tmate@v3
-    #   with:
-    #     limit-access-to-actor: true
+    # - name: free up disk space
+    #   run: ./free-disk-space.sh
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+      with:
+        limit-access-to-actor: true
