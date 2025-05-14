@@ -1,33 +1,44 @@
 name: CI
 on: [push]
 jobs:
-  build:
-    runs-on: ubuntu-24.04
-    concurrency:
-      group: actions-test-${{ github.ref }}
-      cancel-in-progress: true
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        persist-credentials: false
-    - name: free up disk space
-      run: ./free-disk-main.sh
-    # - name: Setup tmate session
-    #   uses: mxschmitt/action-tmate@v3
-    #   with:
-    #     limit-access-to-actor: true
+  # build:
+  #   runs-on: ubuntu-24.04
+  #   concurrency:
+  #     group: actions-test-${{ github.ref }}
+  #     cancel-in-progress: true
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #     with:
+  #       persist-credentials: false
+  #   - name: free up disk space
+  #     run: ./free-disk-main.sh
+  # - name: Setup tmate session
+  #   uses: mxschmitt/action-tmate@v3
+  #   with:
+  #     limit-access-to-actor: true
 
-  build-arm:
-    runs-on: ubuntu-22.04-arm
-    concurrency:
-      group: actions-test-arm-${{ github.ref }}
-      cancel-in-progress: true
+  # build-arm:
+  #   runs-on: ubuntu-22.04-arm
+  #   concurrency:
+  #     group: actions-test-arm-${{ github.ref }}
+  #     cancel-in-progress: true
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #     with:
+  #       persist-credentials: false
+  #   - name: free up disk space
+  #     run: ./free-disk-main.sh
+  #   - name: Setup tmate session
+  #     uses: mxschmitt/action-tmate@v3
+  #     with:
+  #       limit-access-to-actor: true
+
+  build-win:
+    runs-on: windows-2025
     steps:
     - uses: actions/checkout@v4
       with:
         persist-credentials: false
-    - name: free up disk space
-      run: ./free-disk-main.sh
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
       with:
