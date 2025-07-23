@@ -25,9 +25,10 @@ foreach ($dir in $dirs) {
         if (Test-Path -LiteralPath $dir) {
                 Write-Output "::warning file=$PSCommandPath::Directory still exists: $dir"
         }
-        if (Test-Path -LiteralPath 'C:\Program Files\MongoDB') {
-                Write-Output "::warning file=$PSCommandPath::Directory still exists: MongoDB"
-        }
+}
+
+if (Test-Path -LiteralPath 'C:\Program Files\MongoDB') {
+        Write-Output "::warning file=$PSCommandPath::Directory still exists: MongoDB"
 }
 
 Get-Volume | Out-String | Write-Output
