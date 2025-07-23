@@ -33,4 +33,5 @@ foreach ($dir in $dirs) {
 Get-Volume | Out-String | Write-Output
 
 $saved = ($(Get-Volume C).SizeRemaining - $available) / 1gb
-Write-Output "total space saved $saved GB"
+$savedRounded = [math]::Round($saved, 3)
+Write-Output "total space saved $savedRounded GB"
