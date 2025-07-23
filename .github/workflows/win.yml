@@ -1,0 +1,11 @@
+name: CI
+on: [push]
+jobs:
+  win:
+    runs-on: windows-2025
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        persist-credentials: false
+    - name: free up disk space
+      run: ./free-win-disk.ps1
