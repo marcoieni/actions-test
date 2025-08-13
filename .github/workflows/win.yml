@@ -9,6 +9,8 @@ jobs:
         persist-credentials: false
     - name: free up disk space
       run: ./free-disk-space.sh
+      shell: bash
     - name: wait for Windows disk cleanup to finish
       run: |
         python3 free-disk-space-windows-wait.py
+      shell: bash
