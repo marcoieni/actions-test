@@ -29,6 +29,7 @@ def is_process_running(pid: int) -> bool:
 
 
 def main() -> int:
+    print("Waiting for Windows disk cleanup to finish...")
     temp_dir = get_temp_dir()
     pid_file = temp_dir / "free-disk-space.pid"
     log_file = temp_dir / "free-disk-space.log"

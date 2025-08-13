@@ -16,6 +16,7 @@ def get_temp_dir() -> Path:
 
 
 def main() -> int:
+    print("Starting Windows disk cleanup...")
     script_dir = Path(__file__).resolve().parent
     cleanup_script = script_dir / "free-disk-space-windows.ps1"
     if not cleanup_script.exists():
