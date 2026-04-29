@@ -161,7 +161,7 @@ removeUnusedFilesAndDirs() {
         if isX86; then
             to_remove+=("${github_runner_x86_paths[@]}")
         else
-            # assert that x86-only paths are not present on non-x86 runners
+            # warn if x86-only paths are present in other runners
             local existing_github_runner_x86_paths=()
             local x86_path
             for x86_path in "${github_runner_x86_paths[@]}"; do
@@ -171,7 +171,7 @@ removeUnusedFilesAndDirs() {
             done
 
             if [ "${#existing_github_runner_x86_paths[@]}" -ne 0 ]; then
-                echo "::warning::You can remove the following paths from a non-x86 runner to save space: ${existing_github_runner_x86_paths[*]}"
+                echo "::warning::You can remove the following paths to save space: ${existing_github_runner_x86_paths[*]}"
             fi
         fi
 
@@ -257,7 +257,7 @@ cleanPackages() {
         if isX86; then
             packages+=("${x86_only_packages[@]}")
         else
-            # assert that x86-only packages are not installed on non-x86 runners
+            # warn if x86-only packages are installed on other runners
             local installed_x86_only_packages=()
             local package
             for package in "${x86_only_packages[@]}"; do
@@ -267,7 +267,7 @@ cleanPackages() {
             done
 
             if [ "${#installed_x86_only_packages[@]}" -ne 0 ]; then
-                echo "::warning::You can remove the following packages from a non-x86 runner to save space: ${installed_x86_only_packages[*]}"
+                echo "::warning::You can remove the following packages to save space: ${installed_x86_only_packages[*]}"
             fi
         fi
     else
