@@ -11,7 +11,7 @@ jobs:
       with:
         persist-credentials: false
     - name: free up disk space
-      run: ./free-disk-linux.sh
+      run: ./free-disk-space-linux.sh
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
       with:
