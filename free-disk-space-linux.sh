@@ -245,8 +245,7 @@ cleanPackages() {
             done
 
             if [ "${#installed_x86_only_packages[@]}" -ne 0 ]; then
-                echo "::error::Expected GitHub-hosted non-x86 runner to not include x86-only packages: ${installed_x86_only_packages[*]}"
-                exit 1
+                echo "::warning::You can remove the following packages from a non-x86 runner to save space: ${installed_x86_only_packages[*]}"
             fi
         fi
     else
