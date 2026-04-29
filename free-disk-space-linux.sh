@@ -251,7 +251,8 @@ cleanSwap() {
 }
 
 sufficientSpaceEarlyExit() {
-    local available_space_kb=$(df -k . --output=avail | tail -n 1)
+    local available_space_kb
+    available_space_kb=$(df -k . --output=avail | tail -n 1)
 
     if [ "$available_space_kb" -ge "$space_target_kb" ]; then
         echo "Sufficient disk space available (${available_space_kb}KB >= ${space_target_kb}KB). Skipping cleanup."
@@ -265,7 +266,8 @@ sufficientSpaceEarlyExit() {
 checkAlternative() {
     local gha_alt_disk="/mnt"
 
-    local available_space_kb=$(df -k "$gha_alt_disk" --output=avail | tail -n 1)
+    local available_space_kb
+    available_space_kb=$(df -k "$gha_alt_disk" --output=avail | tail -n 1)
 
     # mount options that trade durability for performance
     # ignore-tidy-linelength
@@ -274,7 +276,8 @@ checkAlternative() {
     # GHA has a 2nd disk mounted at /mnt that is almost empty.
     # Check if it's a valid mountpoint and it has enough available space.
     if mountpoint "$gha_alt_disk" && [ "$available_space_kb" -ge "$space_target_kb" ]; then
-        local blkdev=$(df -k "$gha_alt_disk" --output=source | tail -n 1)
+        local blkdev
+        blkdev=$(df -k "$gha_alt_disk" --output=source | tail -n 1)
         echo "Sufficient space available on $blkdev mounted at $gha_alt_disk"
         # see cleanSwap(), swapfile may be mounted under /mnt
         sudo swapoff -a || true
