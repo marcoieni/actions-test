@@ -218,6 +218,14 @@ cleanPackages() {
         'podman'
         'skopeo'
     )
+    local x86_only_packages=(
+        'google-chrome-stable'
+        'google-cloud-cli'
+        'google-cloud-sdk'
+        'kubectl'
+        'microsoft-edge-stable'
+        'powershell'
+    )
 
     if isGitHubRunner; then
         packages+=(
@@ -225,14 +233,21 @@ cleanPackages() {
         )
 
         if isX86; then
-            packages+=(
-                'google-chrome-stable'
-                'google-cloud-cli'
-                'google-cloud-sdk'
-                'kubectl'
-                'microsoft-edge-stable'
-                'powershell'
-            )
+            packages+=("${x86_only_packages[@]}")
+        else
+            # assert that x86-only packages are not installed on non-x86 runners
+            local installed_x86_only_packages=()
+            local package
+            for package in "${x86_only_packages[@]}"; do
+                if dpkg-query -W -f='${binary:Package}\n' "$package" >/dev/null 2>&1; then
+                    installed_x86_only_packages+=("$package")
+                fi
+            done
+
+            if [ "${#installed_x86_only_packages[@]}" -ne 0 ]; then
+                echo "::error::Expected GitHub-hosted non-x86 runner to not include x86-only packages: ${installed_x86_only_packages[*]}"
+                exit 1
+            fi
         fi
     else
         packages+=(
