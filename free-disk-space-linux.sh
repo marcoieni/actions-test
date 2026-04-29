@@ -359,7 +359,7 @@ AVAILABLE_INITIAL=$(getAvailableSpace)
 printDF "BEFORE CLEAN-UP:"
 echo ""
 
-sufficientSpaceEarlyExit
+# sufficientSpaceEarlyExit
 checkAlternative
 
 execAndMeasureSpaceChange cleanPackages "Unused packages"
