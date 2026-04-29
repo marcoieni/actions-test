@@ -96,15 +96,11 @@ removeUnusedFilesAndDirs() {
     )
 
     if isGitHubRunner; then
+        # Paths common to all runners (both x86 and ARM)
         to_remove+=(
             "/usr/local/aws-sam-cli"
             "/usr/local/doc/cmake"
-            "/usr/local/julia"*
-            "/usr/local/lib/android"
-            "/usr/local/share/chromedriver-"*
-            "/usr/local/share/chromium"
             "/usr/local/share/cmake-"*
-            "/usr/local/share/edge_driver"
             "/usr/local/share/emacs"
             "/usr/local/share/gecko_driver"
             "/usr/local/share/icons"
@@ -112,16 +108,13 @@ removeUnusedFilesAndDirs() {
             "/usr/local/share/vcpkg"
             "/usr/local/share/vim"
             "/usr/share/apache-maven-"*
-            "/usr/share/gradle-"*
             "/usr/share/kotlinc"
-            "/usr/share/miniconda"
             "/usr/share/php"
             "/usr/share/ri"
             "/usr/share/swift"
 
             # binaries
             "/usr/local/bin/azcopy"
-            "/usr/local/bin/bicep"
             "/usr/local/bin/ccmake"
             "/usr/local/bin/cmake-"*
             "/usr/local/bin/cmake"
@@ -135,10 +128,6 @@ removeUnusedFilesAndDirs() {
             "/usr/local/bin/phpunit"
             "/usr/local/bin/pulumi-"*
             "/usr/local/bin/pulumi"
-            "/usr/local/bin/stack"
-
-            # Haskell runtime
-            "/usr/local/.ghcup"
 
             # Azure
             "/opt/az"
@@ -150,6 +139,27 @@ removeUnusedFilesAndDirs() {
             "/opt/pipx"
             "/opt/pipx_bin"
         )
+
+        local github_runner_x86_paths=(
+            "/usr/local/julia"*
+            "/usr/local/lib/android"
+            "/usr/local/share/chromedriver-"*
+            "/usr/local/share/chromium"
+            "/usr/local/share/edge_driver"
+            "/usr/share/gradle-"*
+            "/usr/share/miniconda"
+
+            # binaries
+            "/usr/local/bin/bicep"
+            "/usr/local/bin/stack"
+
+            # Haskell runtime
+            "/usr/local/.ghcup"
+        )
+
+        if isX86; then
+            to_remove+=("${github_runner_x86_paths[@]}")
+        fi
 
         if [ -n "${AGENT_TOOLSDIRECTORY:-}" ]; then
             # Environment variable set by GitHub Actions
