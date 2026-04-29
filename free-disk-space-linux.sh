@@ -140,6 +140,7 @@ removeUnusedFilesAndDirs() {
             "/opt/pipx_bin"
         )
 
+        # Paths only present in x86 runners
         local github_runner_x86_paths=(
             "/usr/local/julia"*
             "/usr/local/lib/android"
@@ -159,6 +160,19 @@ removeUnusedFilesAndDirs() {
 
         if isX86; then
             to_remove+=("${github_runner_x86_paths[@]}")
+        else
+            # assert that x86-only paths are not present on non-x86 runners
+            local existing_github_runner_x86_paths=()
+            local x86_path
+            for x86_path in "${github_runner_x86_paths[@]}"; do
+                if [ -e "$x86_path" ]; then
+                    existing_github_runner_x86_paths+=("$x86_path")
+                fi
+            done
+
+            if [ "${#existing_github_runner_x86_paths[@]}" -ne 0 ]; then
+                echo "::warning::You can remove the following paths from a non-x86 runner to save space: ${existing_github_runner_x86_paths[*]}"
+            fi
         fi
 
         if [ -n "${AGENT_TOOLSDIRECTORY:-}" ]; then
