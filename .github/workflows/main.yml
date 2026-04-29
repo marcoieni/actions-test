@@ -12,7 +12,23 @@ jobs:
         persist-credentials: false
     - name: free up disk space
       run: ./free-disk-space-linux.sh
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+    # - name: Setup tmate session
+    #   uses: mxschmitt/action-tmate@v3
+    #   with:
+    #     limit-access-to-actor: true
+
+  build-arm:
+    runs-on: ubuntu-22.04-arm
+    concurrency:
+      group: actions-test-arm-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+    - uses: actions/checkout@v6
       with:
-        limit-access-to-actor: true
+        persist-credentials: false
+    - name: free up disk space
+      run: ./free-disk-space-linux.sh
+    # - name: Setup tmate session
+    #   uses: mxschmitt/action-tmate@v3
+    #   with:
+    #     limit-access-to-actor: true
