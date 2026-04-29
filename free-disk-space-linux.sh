@@ -360,7 +360,7 @@ printDF "BEFORE CLEAN-UP:"
 echo ""
 
 # sufficientSpaceEarlyExit
-checkAlternative
+# checkAlternative
 
 execAndMeasureSpaceChange cleanPackages "Unused packages"
 execAndMeasureSpaceChange cleanDocker "Docker images"
