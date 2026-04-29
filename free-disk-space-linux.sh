@@ -209,10 +209,14 @@ cleanPackages() {
         '^dotnet-.*'
         '^llvm-.*'
         '^mongodb-.*'
+        '^temurin-.*-jdk'
+        'buildah'
         'firefox'
         'libgl1-mesa-dri'
         'mono-devel'
         'php.*'
+        'podman'
+        'skopeo'
     )
 
     if isGitHubRunner; then
@@ -225,6 +229,8 @@ cleanPackages() {
                 'google-chrome-stable'
                 'google-cloud-cli'
                 'google-cloud-sdk'
+                'kubectl'
+                'microsoft-edge-stable'
                 'powershell'
             )
         fi
