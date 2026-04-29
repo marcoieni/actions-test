@@ -144,8 +144,6 @@ removeUnusedFilesAndDirs() {
             "/opt/az"
             "/usr/share/az_"*
 
-            # google chrome browser
-            "/opt/google"
             # Microsoft Edge and powershell
             "/opt/microsoft"
 
@@ -212,6 +210,9 @@ cleanPackages() {
         '^temurin-.*-jdk'
         'buildah'
         'firefox'
+        'google-cloud-cli'
+        'google-cloud-sdk'
+        'kubectl'
         'libgl1-mesa-dri'
         'mono-devel'
         'php.*'
@@ -220,9 +221,6 @@ cleanPackages() {
     )
     local x86_only_packages=(
         'google-chrome-stable'
-        'google-cloud-cli'
-        'google-cloud-sdk'
-        'kubectl'
         'microsoft-edge-stable'
         'powershell'
     )
