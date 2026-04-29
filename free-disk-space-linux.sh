@@ -143,6 +143,14 @@ removeUnusedFilesAndDirs() {
             # Azure
             "/opt/az"
             "/usr/share/az_"*
+
+            # google chrome browser
+            "/opt/google"
+            # Microsoft Edge and powershell
+            "/opt/microsoft"
+
+            "/opt/pipx"
+            "/opt/pipx_bin"
         )
 
         if [ -n "${AGENT_TOOLSDIRECTORY:-}" ]; then
