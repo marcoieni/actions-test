@@ -263,7 +263,17 @@ cleanPackages() {
 
 # Remove preinstalled Docker images.
 cleanDocker() {
+    local images
+    images=$(sudo docker image ls -q)
+
+    if [ -z "$images" ]; then
+        echo "=> No docker images to remove."
+        return
+    fi
+
     echo "=> Removing the following docker images:"
+    # Use "docker image ls" without "-q" to get the full table output which contains
+    # also the image names and sizes.
     sudo docker image ls
     echo "=> Removing docker images..."
     sudo docker image prune --all --force || true
